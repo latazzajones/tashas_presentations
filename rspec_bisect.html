@@ -18,7 +18,7 @@
 		<link rel="stylesheet" href="css/theme/white.css" id="theme">
 
 		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/tashas_hilight.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -130,7 +130,7 @@
         </section>
         <section>
           <p>And finally got the following output!</p>
-          <pre><code class="ruby" data-noescape>
+          <pre><code class="vim" data-noescape>
     artful.ly ((HEAD detached at f629389))$ rspec lib/artfully_ose/spec/ --bisect
     Bisect started using options: "lib/artfully_ose/spec/"
     Running suite to find failures... (17 minutes 32 seconds)
@@ -199,7 +199,7 @@
         </section>
         <section>
           <p>See the part that says "The minimal reproduction command is"?</p>
-          <pre><code class="ruby" data-noescape>
+          <pre><code class="vim" data-noescape>
     artful.ly ((HEAD detached at f629389))$ rspec lib/artfully_ose/spec/ --bisect
     Bisect started using options: "lib/artfully_ose/spec/"
     Running suite to find failures... (17 minutes 32 seconds)
@@ -217,8 +217,8 @@
         <section>
           <p>We want everything after that</p>
           <pre><code class="vim" data-noescape>
-    The minimal reproduction command is:
-      <mark>rspec ./lib/artfully_ose/spec/features/import_v2/people_csv_upload_spec.rb[1:2:4:1]
+    The minimal reproduction command is :
+      <mark >rspec ./lib/artfully_ose/spec/features/import_v2/people_csv_upload_spec.rb[1:2:4:1]
       ./lib/artfully_ose/spec/features/update_chart_spec.rb[1:1:1,1:2:1]
       ./lib/artfully_ose/spec/features/update_ticket_type_spec.rb[1:1:1]
       ./lib/artfully_ose/spec/integration/household_address_spec.rb[1:3,1:4]
@@ -258,15 +258,53 @@
       ./lib/artfully_ose/spec/models/discount_spec.rb[1:1,1:2,1:3,1:4,1:5,1:6:2,1:6:3,1:7:1,1:7:2:1,1:8:1,1:8:2,1:9:1,1:10:1,1:11:1,
       1:12:1:1:1,1:12:1:2:1:1,1:12:1:2:2:1,1:12:2:1:1,1:13:1:1,1:13:1:2,1:13:2:1,1:13:2:2,1:13:3:1]
       ./lib/artfully_ose/spec/models/discounts/discount_type_spec.rb[1:1:1]
-      ./lib/artfully_ose/spec/models/import_v2/person/update_job_spec.rb[1:1:1,1:1:2,1:1:3,1:1:4,1:2:1,1:3:1,1:3:2,1:3:3]<mark>
+      ./lib/artfully_ose/spec/models/import_v2/person/update_job_spec.rb[1:1:1,1:1:2,1:1:3,1:1:4,1:2:1,1:3:1,1:3:2,1:3:3]</mark>
           </code></pre>
         </section>
         <section>
           <p>So I ran that insane RSpec command:</p>
-          <pre style="width: 53em"><code class="ruby" data-noescape>
-            artful.ly (branch_from_hell)$ rspec lib/artfully_os/spec/ --bisect
-            Bisect started using options: "lib/artfully_ose/spec/"
-            Running suite to find failures...
+          <pre><code class="vim" data-noescape>
+            artful.ly (branch_from_hell)$ rspec ./lib/artfully_ose/spec/features/import_v2/people_csv_upload_spec.rb[1:2:4:1]
+            ./lib/artfully_ose/spec/features/update_chart_spec.rb[1:1:1,1:2:1]
+            ./lib/artfully_ose/spec/features/update_ticket_type_spec.rb[1:1:1]
+            ./lib/artfully_ose/spec/integration/household_address_spec.rb[1:3,1:4]
+            ./lib/artfully_ose/spec/mailers/order_mailer_spec.rb[1:1:1,1:1:2,1:1:3,1:1:4,1:1:5,1:1:6:1,1:1:6:2,1:1:7:1,1:1:7:2]
+            ./lib/artfully_ose/spec/models/advanced_search_spec.rb[1:1:1:1:1,1:1:1:1:2,1:1:2:1:1,1:1:2:1:2,1:1:3:1:1,1:1:3:1:2,1:1:4:1:1,1
+            :1:4:1:2,1:1:5:1:1,1:1:5:1:2,1:2:1:1:1,1:2:1:1:2,1:2:2:1:1,1:2:2:1:2,1:2:3:1:1,1:2:3:1:2,1:2:4:1:1,1:2:4:1:2,1:2:5:1:1,1:2:5:1
+            :2,1:3:1:1:1,1:3:1:1:2,1:3:2:1:1,1:3:2:1:2,1:3:3:1:1,1:3:3:1:2,1:3:4:1:1,1:3:4:1:2,1:3:5:1:1,1:3:5:1:2,1:3:6:1:1,1:3:6:1:2,1:4
+            :1:1:1,1:4:1:1:2,1:4:2:1:1,1:4:2:1:2,1:4:3:1:1,1:4:3:1:2,1:4:4:1:1,1:4:4:1:2,1:4:5:1:1,1:4:5:1:2,1:4:6:1:1,1:4:6:1:2,1:5:1:1:1
+            ,1:5:1:1:2,1:5:2:1:1,1:5:2:1:2,1:5:3:1:1,1:5:3:1:2,1:5:4:1:1,1:5:4:1:2,1:5:5:1:1,1:5:5:1:2,1:6:1:1:1,1:6:1:1:2,1:7:1:1:1,1:7:1
+            :1:2,1:8:1:1:1,1:8:1:1:2,1:8:2:1:1,1:8:2:1:2,1:9:1:1:1,1:9:1:1:2,1:9:2:1:1,1:9:2:1:2,1:10:1:1:1,1:10:1:1:2,1:10:2:1:1,1:10:2:1
+            :2,1:10:3:1:1,1:10:3:1:2,1:11:1:1:1,1:11:1:1:2,1:11:2:1:1,1:11:2:1:2,1:11:3:1:1,1:11:3:1:2,1:12:1:1:1,1:12:1:1:2,1:12:2:1:1,1:
+            12:2:1:2,1:12:3:1:1,1:12:3:1:2,1:12:4:1:1,1:12:4:1:2,1:13:1:1:1,1:13:1:1:2,1:13:2:1:1,1:13:2:1:2,1:13:3:1:1,1:13:3:1:2,1:13:4:
+            1:1,1:13:4:1:2,1:14:1:1:1,1:14:1:1:2,1:14:2:1:1,1:14:2:1:2,1:15:1:1:1,1:15:1:1:2,1:15:2:1:1,1:15:2:1:2,1:16:1:1:1,1:16:1:1:2,1
+            :16:2:1:1,1:16:2:1:2,1:16:3:1:1,1:16:3:1:2,1:17:1:1:1,1:17:1:1:2,1:17:2:1:1,1:17:2:1:2,1:17:3:1:1,1:17:3:1:2,1:18:1:1:1,1:18:1
+            :1:2,1:18:2:1:1,1:18:2:1:2,1:19:1:1:1,1:19:1:1:2,1:19:2:1:1,1:19:2:1:2,1:19:3:1:1,1:19:3:1:2,1:19:4:1:1,1:19:4:1:2,1:19:5:1:1,
+            1:19:5:1:2,1:19:6:1:1,1:19:6:1:2,1:19:7:1:1,1:19:7:1:2,1:19:8:1:1,1:19:8:1:2,1:19:9:1:1,1:19:9:1:2,1:20:1:1:1,1:20:1:1:2,1:20:
+            2:1:1,1:20:2:1:2,1:20:3:1:1,1:20:3:1:2,1:20:4:1:1,1:20:4:1:2,1:20:5:1:1,1:20:5:1:2,1:20:6:1:1,1:20:6:1:2,1:20:7:1:1,1:20:7:1:2
+            ,1:21:1:1:1,1:21:1:1:2,1:21:2:1:1,1:21:2:1:2,1:21:3:1:1,1:21:3:1:2,1:21:4:1:1,1:21:4:1:2,1:21:5:1:1,1:21:5:1:2,1:21:6:1:1,1:21
+            :6:1:2,1:21:7:1:1,1:21:7:1:2,1:21:8:1:1,1:21:8:1:2,1:21:9:1:1,1:21:9:1:2,1:21:10:1:1,1:21:10:1:2,1:21:11:1:1,1:21:11:1:2,1:21:
+            12:1:1,1:21:12:1:2,1:22:1:1:1,1:22:1:1:2,1:23:1:1:1,1:23:1:1:2,1:23:2:1:1,1:23:2:1:2,1:24:1:1:1,1:24:1:1:2,1:24:2:1:1,1:24:2:1
+            :2,1:24:3:1:1,1:24:3:1:2,1:24:4:1:1,1:24:4:1:2,1:24:5:1:1,1:24:5:1:2,1:24:6:1:1,1:24:6:1:2,1:25:1:1:1,1:25:1:1:2,1:26:1:1:1,1:
+            26:1:1:2,1:26:2:1:1,1:26:2:1:2,1:26:3:1:1,1:26:3:1:2,1:26:4:1:1,1:26:4:1:2,1:26:5:1:1,1:26:5:1:2,1:26:6:1:1,1:26:6:1:2,1:26:7:
+            1:1,1:26:7:1:2,1:26:8:1:1,1:26:8:1:2,1:27:1:1:1,1:27:1:1:2,1:27:2:1:1,1:27:2:1:2,1:27:3:1:1,1:27:3:1:2,1:27:4:1:1,1:27:4:1:2,1
+            :27:5:1:1,1:27:5:1:2,1:27:6:1:1,1:27:6:1:2,1:27:7:1:1,1:27:7:1:2,1:27:8:1:1,1:27:8:1:2,1:28:1,1:29:1,1:30:1:1,1:30:2:1,1:31:1:
+            1,1:31:2:1,1:32:1:1:1,1:32:1:1:2,1:32:2:1:1,1:32:2:1:2,1:32:3:1:1,1:32:3:1:2,1:32:4:1:1,1:32:4:1:2,1:32:5:1:1,1:32:5:1:2]
+            ./lib/artfully_ose/spec/models/carts/box_office_cart_spec.rb[1:1:2,1:1:3,1:1:4,1:1:5]
+            ./lib/artfully_ose/spec/models/carts/cart_spec.rb[1:3:1,1:3:2,1:7:2,1:7:3,1:7:4,1:7:5,1:7:6,1:8:2,1:10:1,1:12:1]
+            ./lib/artfully_ose/spec/models/chart_spec.rb[1:7:1,1:7:3,1:8] ./lib/artfully_ose/spec/models/checkout_processing_spec.rb[1:1]
+            ./lib/artfully_ose/spec/models/checkout_spec.rb[1:1:1,1:2:1,1:2:2,1:2:3,1:2:4,1:2:5,1:2:6,1:2:7,1:3:1,1:4:1,1:4:2,1:4:3:1,1:4:
+            3:2,1:5:1:1,1:5:1:2,1:5:2:1,1:5:2:2,1:5:3:1,1:5:4:1]
+            ./lib/artfully_ose/spec/models/checkout_validation_spec.rb[1:1,1:2,1:3:1,1:3:2,1:3:3,1:3:4,1:4:1,1:4:2,1:4:3,1:4:4,1:4:5,1:4:6
+            ,1:4:7,1:5:1,1:6:1,1:6:2,1:6:3,1:6:4,1:6:5,1:6:6,1:6:7,1:6:8,1:6:9,1:8:1] ./lib/artfully_ose/spec/models/comp_spec.rb[1:1:1]
+            ./lib/artfully_ose/spec/models/convert_spec.rb[1:1:1,1:2:1,1:2:2,1:2:3]
+            ./lib/artfully_ose/spec/models/daily_donation_report_spec.rb[1:2:2:1,1:2:3:1,1:6:1:1,1:6:2:1,1:6:3:1]
+            ./lib/artfully_ose/spec/models/daily_ticket_report_spec.rb[1:1:1:1,1:1:1:2,1:1:2:1,1:1:2:2,1:2:1,1:3:2:1,1:3:3:1,1:5:1:1,1:7:1
+            :1,1:7:2:1,1:7:3:1,1:7:4:1,1:7:5:1]
+            ./lib/artfully_ose/spec/models/discount_spec.rb[1:1,1:2,1:3,1:4,1:5,1:6:2,1:6:3,1:7:1,1:7:2:1,1:8:1,1:8:2,1:9:1,1:10:1,1:11:1,
+            1:12:1:1:1,1:12:1:2:1:1,1:12:1:2:2:1,1:12:2:1:1,1:13:1:1,1:13:1:2,1:13:2:1,1:13:2:2,1:13:3:1]
+            ./lib/artfully_ose/spec/models/discounts/discount_type_spec.rb[1:1:1]
+            ./lib/artfully_ose/spec/models/import_v2/person/update_job_spec.rb[1:1:1,1:1:2,1:1:3,1:1:4,1:2:1,1:3:1,1:3:2,1:3:3]
           </code></pre>
         </section>
         <section>
@@ -274,21 +312,62 @@
           <img style="/*!  */" width="1000px" src="assets/rspec_bisect/poetry.gif">
         </section>
         <section>
-          <pre style="width: 53em"><code class="ruby" data-noescape>
+          <pre><code class="vim" data-noescape>
+      Finished in 44.89 seconds (files took 10.46 seconds to load)
+      <mark>258 examples, 257 failures</mark>
 
+      Failed examples:
+
+      rspec ./lib/artfully_ose/spec/features/update_chart_spec.rb:14 # Updating a chart when the path is happy the ticket type is updated
+      rspec ./lib/artfully_ose/spec/features/update_chart_spec.rb:24 # Updating a chart when the path is incorrect a ticket type is saved without a name
           </code></pre>
         </section>
         <section>
           <p>Apparently I'd forgotten to durn Delayed Jobs back on
           <br>and my spec env was bleeding all over the place</p>
-          <pre style="width: 53em"><code class="ruby" data-noescape>
+          <pre><code class="ruby" data-noescape>
+            RSpec.feature 'uploading people' do
+              include Features::SessionHelpers
 
+              let!(:producer) { create :user_in_organization }
+              let!(:organization) { producer.current_organization }
+
+              <mark>before do</mark>
+                <mark>Delayed::Worker.delay_jobs = false</mark>
+              <mark>end</mark>
+
+              context 'an import is creating new and unique people', search: true do
+          </code></pre>
+        </section>
+        <section>
+          <p>Easily fixed</p>
+          <pre><code class="ruby" data-noescape>
+            RSpec.feature 'uploading people' do
+              include Features::SessionHelpers
+
+              let!(:producer) { create :user_in_organization }
+              let!(:organization) { producer.current_organization }
+
+              before do
+                Delayed::Worker.delay_jobs = false
+              end
+
+              after(:all) do
+                Delayed::Worker.delay_jobs = true
+              end
+
+              context 'an import is creating new and unique people', search: true do
           </code></pre>
         </section>
         <section>
           <p>With that fixed - my suite was green again</p>
-          <pre style="width: 53em"><code class="ruby" data-noescape>
+          <pre><code class="vim" data-noescape>
+            artful.ly (add_simplecov)$ rspec .
 
+            Finished in 0.4909 seconds (files took 8.62 seconds to load)
+            333 examples, 0 failures
+              Fabulous tests in 0.490903
+              0 examples, 0 failures, 0 pending
           </code></pre>
         </section>
         <section>
