@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+        <section>
+          <img src="assets/rspec_bisect/angry.gif">
+        </section>
+        <section>
+          <p>One day ci decided to do this to me:</p>
+          <img width="60%" src="assets/rspec_bisect/ci_is_a_jerk.png">
+        </section>
+        <section>
+          <p>And trying to fix my build for a FULL FUCKING DAY</p>
+        </section>
+        <section>
+					<p>I ran out of ideas, which was my queue to midlessly poke around on the internet</p>
+				</section>
+        <section>
+					<p>check twitter</p>
+				</section>
+        <section>
+					<p>remember that twitter's kinda boring</p>
+				</section>
+        <section>
+					<p>check facebook</p>
+				</section>
+        <section>
+					<p>remember that facebook's kinda boring</p>
+				</section>
+        <section>
+					<p>read through old Ruby Weekly emails</p>
+				</section>
+        <section>
+					<p>which are a marginally less boring</p>
+				</section>
+        <section>
+					<p>Since they occasionally feature our friends including:</p>
+          <ul>
+            <li><a href="https://twitter.com/vaidehijoshi">@vaidehijoshi</a></li>
+            <li><a href="https://twitter.com/jamie_gaskins">@jamie_gaskins</a></li>
+          </ul>
+				</section>
+        <section>
+          <p>you to can get old Ruby Weekly emails by going to <a href="http://rubyweekly.com/">http://rubyweekly.com/</a></p>
+        </section>
+        <section>
+          <p>While reading a blog post (a.k.a. procrastinating) I came across this ...</p>
+          <img width="75%" height="auto" src="assets/rspec_bisect/procrastination.png">
+          <p>My interest was peaked so I clicked the link to the thing the post was NOT about ... </p>
+				</section>
+        <section>
+          <p>and what i found there - out in the wilds of the internet ... </p>
+          <p>(in the <a href="https://relishapp.com/rspec/rspec-core/docs">RSpec docs</a>)</p>
+        </section>
+        <section>
+          <img style="/*!  */" width="1000px" src="assets/rspec_bisect/moment_of_truth.gif">
+				</section>
+        <section>
+          <p>Was a really fantastic tool for debugging built right in to the tool that was kicking my butt</p>
+        </section>
+        <section>
+					<h1>RSpec --bisect</h1>
+          <small>A presentation by Tasha Jones</a> / <a href="http://twitter.com/latazzajones">@latazzajones</a></small>
+				</section>
+        <section>
+          <p>After scanning the docs, I plugged the following into my console:
+          <pre style="width: 53em"><code class="ruby" data-noescape>
+            artful.ly (branch_from_hell)$ <mark>rspec lib/artfully_os/spec/ --bisect</mark>
+          </code></pre>
+          </p>
+        </section>
+        <section>
+          <p>And what I got back wasn't very exciting:
+          <pre style="width: 53em"><code class="ruby" data-noescape>
+            artful.ly (branch_from_hell)$ rspec lib/artfully_os/spec/ --bisect
+            Bisect started using options: "lib/artfully_ose/spec/"
+            Running suite to find failures...
+          </code></pre>
+          </p>
+        </section>
+        <section>
+          <p>I'd read that using RSpec --bisect includes a long coffee break</p>
+        </section>
+        <section>
+          <p>But I don't drink coffee ...</p>
+        </section>
+        <section>
+          <p>so I waited</p>
+        </section>
+        <section>
+          <p>56 minutes</p>
+        </section>
+        <section>
+          <p>And finally got the following output!</p>
+          <pre><code class="ruby" data-noescape>
+    artful.ly ((HEAD detached at f629389))$ rspec lib/artfully_ose/spec/ --bisect
+    Bisect started using options: "lib/artfully_ose/spec/"
+    Running suite to find failures... (17 minutes 32 seconds)
+    Starting bisect with 372 failing examples and 1776 non-failing examples.
+
+    Round 1: searching for 888 non-failing examples (of 1776) to ignore: .. (9 minutes 8 seconds)
+    Round 2: searching for 444 non-failing examples (of 888) to ignore: .. (7 minutes 9 seconds)
+    Round 3: searching for 222 non-failing examples (of 444) to ignore: .. (6 minutes 29 seconds)
+    Round 4: searching for 111 non-failing examples (of 222) to ignore: . (5 minutes 23 seconds)
+    Round 5: searching for 56 non-failing examples (of 111) to ignore: . (4 minutes 27.3 seconds)
+    Round 6: searching for 28 non-failing examples (of 55) to ignore: .. (4 minutes 52.1 seconds)
+    Round 7: searching for 14 non-failing examples (of 28) to ignore: . (4 minutes 40.7 seconds)
+    Round 8: searching for 7 non-failing examples (of 14) to ignore: .. (5 minutes 26 seconds)
+    Round 9: searching for 4 non-failing examples (of 7) to ignore: . (4 minutes 11.1 seconds)
+    Round 10: searching for 2 non-failing examples (of 3) to ignore: . (4 minutes 43.7 seconds)
+    Round 11: searching for 1 non-failing example (of 1) to ignore: . (17.8 seconds)
+    Bisect complete! Reduced necessary non-failing examples from 1776 to 1 in 56 minutes 47 seconds.
+
+    The minimal reproduction command is:
+      rspec ./lib/artfully_ose/spec/features/import_v2/people_csv_upload_spec.rb[1:2:4:1]
+      ./lib/artfully_ose/spec/features/update_chart_spec.rb[1:1:1,1:2:1]
+      ./lib/artfully_ose/spec/features/update_ticket_type_spec.rb[1:1:1]
+      ./lib/artfully_ose/spec/integration/household_address_spec.rb[1:3,1:4]
+      ./lib/artfully_ose/spec/mailers/order_mailer_spec.rb[1:1:1,1:1:2,1:1:3,1:1:4,1:1:5,1:1:6:1,1:1:6:2,1:1:7:1,1:1:7:2]
+      ./lib/artfully_ose/spec/models/advanced_search_spec.rb[1:1:1:1:1,1:1:1:1:2,1:1:2:1:1,1:1:2:1:2,1:1:3:1:1,1:1:3:1:2,1:1:4:1:1,1
+      :1:4:1:2,1:1:5:1:1,1:1:5:1:2,1:2:1:1:1,1:2:1:1:2,1:2:2:1:1,1:2:2:1:2,1:2:3:1:1,1:2:3:1:2,1:2:4:1:1,1:2:4:1:2,1:2:5:1:1,1:2:5:1
+      :2,1:3:1:1:1,1:3:1:1:2,1:3:2:1:1,1:3:2:1:2,1:3:3:1:1,1:3:3:1:2,1:3:4:1:1,1:3:4:1:2,1:3:5:1:1,1:3:5:1:2,1:3:6:1:1,1:3:6:1:2,1:4
+      :1:1:1,1:4:1:1:2,1:4:2:1:1,1:4:2:1:2,1:4:3:1:1,1:4:3:1:2,1:4:4:1:1,1:4:4:1:2,1:4:5:1:1,1:4:5:1:2,1:4:6:1:1,1:4:6:1:2,1:5:1:1:1
+      ,1:5:1:1:2,1:5:2:1:1,1:5:2:1:2,1:5:3:1:1,1:5:3:1:2,1:5:4:1:1,1:5:4:1:2,1:5:5:1:1,1:5:5:1:2,1:6:1:1:1,1:6:1:1:2,1:7:1:1:1,1:7:1
+      :1:2,1:8:1:1:1,1:8:1:1:2,1:8:2:1:1,1:8:2:1:2,1:9:1:1:1,1:9:1:1:2,1:9:2:1:1,1:9:2:1:2,1:10:1:1:1,1:10:1:1:2,1:10:2:1:1,1:10:2:1
+      :2,1:10:3:1:1,1:10:3:1:2,1:11:1:1:1,1:11:1:1:2,1:11:2:1:1,1:11:2:1:2,1:11:3:1:1,1:11:3:1:2,1:12:1:1:1,1:12:1:1:2,1:12:2:1:1,1:
+      12:2:1:2,1:12:3:1:1,1:12:3:1:2,1:12:4:1:1,1:12:4:1:2,1:13:1:1:1,1:13:1:1:2,1:13:2:1:1,1:13:2:1:2,1:13:3:1:1,1:13:3:1:2,1:13:4:
+      1:1,1:13:4:1:2,1:14:1:1:1,1:14:1:1:2,1:14:2:1:1,1:14:2:1:2,1:15:1:1:1,1:15:1:1:2,1:15:2:1:1,1:15:2:1:2,1:16:1:1:1,1:16:1:1:2,1
+      :16:2:1:1,1:16:2:1:2,1:16:3:1:1,1:16:3:1:2,1:17:1:1:1,1:17:1:1:2,1:17:2:1:1,1:17:2:1:2,1:17:3:1:1,1:17:3:1:2,1:18:1:1:1,1:18:1
+      :1:2,1:18:2:1:1,1:18:2:1:2,1:19:1:1:1,1:19:1:1:2,1:19:2:1:1,1:19:2:1:2,1:19:3:1:1,1:19:3:1:2,1:19:4:1:1,1:19:4:1:2,1:19:5:1:1,
+      1:19:5:1:2,1:19:6:1:1,1:19:6:1:2,1:19:7:1:1,1:19:7:1:2,1:19:8:1:1,1:19:8:1:2,1:19:9:1:1,1:19:9:1:2,1:20:1:1:1,1:20:1:1:2,1:20:
+      2:1:1,1:20:2:1:2,1:20:3:1:1,1:20:3:1:2,1:20:4:1:1,1:20:4:1:2,1:20:5:1:1,1:20:5:1:2,1:20:6:1:1,1:20:6:1:2,1:20:7:1:1,1:20:7:1:2
+      ,1:21:1:1:1,1:21:1:1:2,1:21:2:1:1,1:21:2:1:2,1:21:3:1:1,1:21:3:1:2,1:21:4:1:1,1:21:4:1:2,1:21:5:1:1,1:21:5:1:2,1:21:6:1:1,1:21
+      :6:1:2,1:21:7:1:1,1:21:7:1:2,1:21:8:1:1,1:21:8:1:2,1:21:9:1:1,1:21:9:1:2,1:21:10:1:1,1:21:10:1:2,1:21:11:1:1,1:21:11:1:2,1:21:
+      12:1:1,1:21:12:1:2,1:22:1:1:1,1:22:1:1:2,1:23:1:1:1,1:23:1:1:2,1:23:2:1:1,1:23:2:1:2,1:24:1:1:1,1:24:1:1:2,1:24:2:1:1,1:24:2:1
+      :2,1:24:3:1:1,1:24:3:1:2,1:24:4:1:1,1:24:4:1:2,1:24:5:1:1,1:24:5:1:2,1:24:6:1:1,1:24:6:1:2,1:25:1:1:1,1:25:1:1:2,1:26:1:1:1,1:
+      26:1:1:2,1:26:2:1:1,1:26:2:1:2,1:26:3:1:1,1:26:3:1:2,1:26:4:1:1,1:26:4:1:2,1:26:5:1:1,1:26:5:1:2,1:26:6:1:1,1:26:6:1:2,1:26:7:
+      1:1,1:26:7:1:2,1:26:8:1:1,1:26:8:1:2,1:27:1:1:1,1:27:1:1:2,1:27:2:1:1,1:27:2:1:2,1:27:3:1:1,1:27:3:1:2,1:27:4:1:1,1:27:4:1:2,1
+      :27:5:1:1,1:27:5:1:2,1:27:6:1:1,1:27:6:1:2,1:27:7:1:1,1:27:7:1:2,1:27:8:1:1,1:27:8:1:2,1:28:1,1:29:1,1:30:1:1,1:30:2:1,1:31:1:
+      1,1:31:2:1,1:32:1:1:1,1:32:1:1:2,1:32:2:1:1,1:32:2:1:2,1:32:3:1:1,1:32:3:1:2,1:32:4:1:1,1:32:4:1:2,1:32:5:1:1,1:32:5:1:2]
+      ./lib/artfully_ose/spec/models/carts/box_office_cart_spec.rb[1:1:2,1:1:3,1:1:4,1:1:5]
+      ./lib/artfully_ose/spec/models/carts/cart_spec.rb[1:3:1,1:3:2,1:7:2,1:7:3,1:7:4,1:7:5,1:7:6,1:8:2,1:10:1,1:12:1]
+      ./lib/artfully_ose/spec/models/chart_spec.rb[1:7:1,1:7:3,1:8] ./lib/artfully_ose/spec/models/checkout_processing_spec.rb[1:1]
+      ./lib/artfully_ose/spec/models/checkout_spec.rb[1:1:1,1:2:1,1:2:2,1:2:3,1:2:4,1:2:5,1:2:6,1:2:7,1:3:1,1:4:1,1:4:2,1:4:3:1,1:4:
+      3:2,1:5:1:1,1:5:1:2,1:5:2:1,1:5:2:2,1:5:3:1,1:5:4:1]
+      ./lib/artfully_ose/spec/models/checkout_validation_spec.rb[1:1,1:2,1:3:1,1:3:2,1:3:3,1:3:4,1:4:1,1:4:2,1:4:3,1:4:4,1:4:5,1:4:6
+      ,1:4:7,1:5:1,1:6:1,1:6:2,1:6:3,1:6:4,1:6:5,1:6:6,1:6:7,1:6:8,1:6:9,1:8:1] ./lib/artfully_ose/spec/models/comp_spec.rb[1:1:1]
+      ./lib/artfully_ose/spec/models/convert_spec.rb[1:1:1,1:2:1,1:2:2,1:2:3]
+      ./lib/artfully_ose/spec/models/daily_donation_report_spec.rb[1:2:2:1,1:2:3:1,1:6:1:1,1:6:2:1,1:6:3:1]
+      ./lib/artfully_ose/spec/models/daily_ticket_report_spec.rb[1:1:1:1,1:1:1:2,1:1:2:1,1:1:2:2,1:2:1,1:3:2:1,1:3:3:1,1:5:1:1,1:7:1
+      :1,1:7:2:1,1:7:3:1,1:7:4:1,1:7:5:1]
+      ./lib/artfully_ose/spec/models/discount_spec.rb[1:1,1:2,1:3,1:4,1:5,1:6:2,1:6:3,1:7:1,1:7:2:1,1:8:1,1:8:2,1:9:1,1:10:1,1:11:1,
+      1:12:1:1:1,1:12:1:2:1:1,1:12:1:2:2:1,1:12:2:1:1,1:13:1:1,1:13:1:2,1:13:2:1,1:13:2:2,1:13:3:1]
+      ./lib/artfully_ose/spec/models/discounts/discount_type_spec.rb[1:1:1]
+      ./lib/artfully_ose/spec/models/import_v2/person/update_job_spec.rb[1:1:1,1:1:2,1:1:3,1:1:4,1:2:1,1:3:1,1:3:2,1:3:3]
+
+
+
+    artful.ly ((HEAD detached at f629389))$
+          </code></pre>
+        </section>
+        <section>
+          <p>See the part that says "The minimal reproduction command is"?</p>
+          <pre><code class="ruby" data-noescape>
+    artful.ly ((HEAD detached at f629389))$ rspec lib/artfully_ose/spec/ --bisect
+    Bisect started using options: "lib/artfully_ose/spec/"
+    Running suite to find failures... (17 minutes 32 seconds)
+    .
+    .
+    .
+    <mark>The minimal reproduction command is:</mark>
+      rspec ./lib/artfully_ose/spec/features/import_v2/people_csv_upload_spec.rb[1:2:4:1]
+      ./lib/artfully_ose/spec/features/update_chart_spec.rb[1:1:1,1:2:1]
+      .
+      .
+      .
+          </code></pre>
+        </section>
+        <section>
+          <p>We want everything after that</p>
+          <pre><code class="vim" data-noescape>
+    The minimal reproduction command is:
+      <mark>rspec ./lib/artfully_ose/spec/features/import_v2/people_csv_upload_spec.rb[1:2:4:1]
+      ./lib/artfully_ose/spec/features/update_chart_spec.rb[1:1:1,1:2:1]
+      ./lib/artfully_ose/spec/features/update_ticket_type_spec.rb[1:1:1]
+      ./lib/artfully_ose/spec/integration/household_address_spec.rb[1:3,1:4]
+      ./lib/artfully_ose/spec/mailers/order_mailer_spec.rb[1:1:1,1:1:2,1:1:3,1:1:4,1:1:5,1:1:6:1,1:1:6:2,1:1:7:1,1:1:7:2]
+      ./lib/artfully_ose/spec/models/advanced_search_spec.rb[1:1:1:1:1,1:1:1:1:2,1:1:2:1:1,1:1:2:1:2,1:1:3:1:1,1:1:3:1:2,1:1:4:1:1,1
+      :1:4:1:2,1:1:5:1:1,1:1:5:1:2,1:2:1:1:1,1:2:1:1:2,1:2:2:1:1,1:2:2:1:2,1:2:3:1:1,1:2:3:1:2,1:2:4:1:1,1:2:4:1:2,1:2:5:1:1,1:2:5:1
+      :2,1:3:1:1:1,1:3:1:1:2,1:3:2:1:1,1:3:2:1:2,1:3:3:1:1,1:3:3:1:2,1:3:4:1:1,1:3:4:1:2,1:3:5:1:1,1:3:5:1:2,1:3:6:1:1,1:3:6:1:2,1:4
+      :1:1:1,1:4:1:1:2,1:4:2:1:1,1:4:2:1:2,1:4:3:1:1,1:4:3:1:2,1:4:4:1:1,1:4:4:1:2,1:4:5:1:1,1:4:5:1:2,1:4:6:1:1,1:4:6:1:2,1:5:1:1:1
+      ,1:5:1:1:2,1:5:2:1:1,1:5:2:1:2,1:5:3:1:1,1:5:3:1:2,1:5:4:1:1,1:5:4:1:2,1:5:5:1:1,1:5:5:1:2,1:6:1:1:1,1:6:1:1:2,1:7:1:1:1,1:7:1
+      :1:2,1:8:1:1:1,1:8:1:1:2,1:8:2:1:1,1:8:2:1:2,1:9:1:1:1,1:9:1:1:2,1:9:2:1:1,1:9:2:1:2,1:10:1:1:1,1:10:1:1:2,1:10:2:1:1,1:10:2:1
+      :2,1:10:3:1:1,1:10:3:1:2,1:11:1:1:1,1:11:1:1:2,1:11:2:1:1,1:11:2:1:2,1:11:3:1:1,1:11:3:1:2,1:12:1:1:1,1:12:1:1:2,1:12:2:1:1,1:
+      12:2:1:2,1:12:3:1:1,1:12:3:1:2,1:12:4:1:1,1:12:4:1:2,1:13:1:1:1,1:13:1:1:2,1:13:2:1:1,1:13:2:1:2,1:13:3:1:1,1:13:3:1:2,1:13:4:
+      1:1,1:13:4:1:2,1:14:1:1:1,1:14:1:1:2,1:14:2:1:1,1:14:2:1:2,1:15:1:1:1,1:15:1:1:2,1:15:2:1:1,1:15:2:1:2,1:16:1:1:1,1:16:1:1:2,1
+      :16:2:1:1,1:16:2:1:2,1:16:3:1:1,1:16:3:1:2,1:17:1:1:1,1:17:1:1:2,1:17:2:1:1,1:17:2:1:2,1:17:3:1:1,1:17:3:1:2,1:18:1:1:1,1:18:1
+      :1:2,1:18:2:1:1,1:18:2:1:2,1:19:1:1:1,1:19:1:1:2,1:19:2:1:1,1:19:2:1:2,1:19:3:1:1,1:19:3:1:2,1:19:4:1:1,1:19:4:1:2,1:19:5:1:1,
+      1:19:5:1:2,1:19:6:1:1,1:19:6:1:2,1:19:7:1:1,1:19:7:1:2,1:19:8:1:1,1:19:8:1:2,1:19:9:1:1,1:19:9:1:2,1:20:1:1:1,1:20:1:1:2,1:20:
+      2:1:1,1:20:2:1:2,1:20:3:1:1,1:20:3:1:2,1:20:4:1:1,1:20:4:1:2,1:20:5:1:1,1:20:5:1:2,1:20:6:1:1,1:20:6:1:2,1:20:7:1:1,1:20:7:1:2
+      ,1:21:1:1:1,1:21:1:1:2,1:21:2:1:1,1:21:2:1:2,1:21:3:1:1,1:21:3:1:2,1:21:4:1:1,1:21:4:1:2,1:21:5:1:1,1:21:5:1:2,1:21:6:1:1,1:21
+      :6:1:2,1:21:7:1:1,1:21:7:1:2,1:21:8:1:1,1:21:8:1:2,1:21:9:1:1,1:21:9:1:2,1:21:10:1:1,1:21:10:1:2,1:21:11:1:1,1:21:11:1:2,1:21:
+      12:1:1,1:21:12:1:2,1:22:1:1:1,1:22:1:1:2,1:23:1:1:1,1:23:1:1:2,1:23:2:1:1,1:23:2:1:2,1:24:1:1:1,1:24:1:1:2,1:24:2:1:1,1:24:2:1
+      :2,1:24:3:1:1,1:24:3:1:2,1:24:4:1:1,1:24:4:1:2,1:24:5:1:1,1:24:5:1:2,1:24:6:1:1,1:24:6:1:2,1:25:1:1:1,1:25:1:1:2,1:26:1:1:1,1:
+      26:1:1:2,1:26:2:1:1,1:26:2:1:2,1:26:3:1:1,1:26:3:1:2,1:26:4:1:1,1:26:4:1:2,1:26:5:1:1,1:26:5:1:2,1:26:6:1:1,1:26:6:1:2,1:26:7:
+      1:1,1:26:7:1:2,1:26:8:1:1,1:26:8:1:2,1:27:1:1:1,1:27:1:1:2,1:27:2:1:1,1:27:2:1:2,1:27:3:1:1,1:27:3:1:2,1:27:4:1:1,1:27:4:1:2,1
+      :27:5:1:1,1:27:5:1:2,1:27:6:1:1,1:27:6:1:2,1:27:7:1:1,1:27:7:1:2,1:27:8:1:1,1:27:8:1:2,1:28:1,1:29:1,1:30:1:1,1:30:2:1,1:31:1:
+      1,1:31:2:1,1:32:1:1:1,1:32:1:1:2,1:32:2:1:1,1:32:2:1:2,1:32:3:1:1,1:32:3:1:2,1:32:4:1:1,1:32:4:1:2,1:32:5:1:1,1:32:5:1:2]
+      ./lib/artfully_ose/spec/models/carts/box_office_cart_spec.rb[1:1:2,1:1:3,1:1:4,1:1:5]
+      ./lib/artfully_ose/spec/models/carts/cart_spec.rb[1:3:1,1:3:2,1:7:2,1:7:3,1:7:4,1:7:5,1:7:6,1:8:2,1:10:1,1:12:1]
+      ./lib/artfully_ose/spec/models/chart_spec.rb[1:7:1,1:7:3,1:8] ./lib/artfully_ose/spec/models/checkout_processing_spec.rb[1:1]
+      ./lib/artfully_ose/spec/models/checkout_spec.rb[1:1:1,1:2:1,1:2:2,1:2:3,1:2:4,1:2:5,1:2:6,1:2:7,1:3:1,1:4:1,1:4:2,1:4:3:1,1:4:
+      3:2,1:5:1:1,1:5:1:2,1:5:2:1,1:5:2:2,1:5:3:1,1:5:4:1]
+      ./lib/artfully_ose/spec/models/checkout_validation_spec.rb[1:1,1:2,1:3:1,1:3:2,1:3:3,1:3:4,1:4:1,1:4:2,1:4:3,1:4:4,1:4:5,1:4:6
+      ,1:4:7,1:5:1,1:6:1,1:6:2,1:6:3,1:6:4,1:6:5,1:6:6,1:6:7,1:6:8,1:6:9,1:8:1] ./lib/artfully_ose/spec/models/comp_spec.rb[1:1:1]
+      ./lib/artfully_ose/spec/models/convert_spec.rb[1:1:1,1:2:1,1:2:2,1:2:3]
+      ./lib/artfully_ose/spec/models/daily_donation_report_spec.rb[1:2:2:1,1:2:3:1,1:6:1:1,1:6:2:1,1:6:3:1]
+      ./lib/artfully_ose/spec/models/daily_ticket_report_spec.rb[1:1:1:1,1:1:1:2,1:1:2:1,1:1:2:2,1:2:1,1:3:2:1,1:3:3:1,1:5:1:1,1:7:1
+      :1,1:7:2:1,1:7:3:1,1:7:4:1,1:7:5:1]
+      ./lib/artfully_ose/spec/models/discount_spec.rb[1:1,1:2,1:3,1:4,1:5,1:6:2,1:6:3,1:7:1,1:7:2:1,1:8:1,1:8:2,1:9:1,1:10:1,1:11:1,
+      1:12:1:1:1,1:12:1:2:1:1,1:12:1:2:2:1,1:12:2:1:1,1:13:1:1,1:13:1:2,1:13:2:1,1:13:2:2,1:13:3:1]
+      ./lib/artfully_ose/spec/models/discounts/discount_type_spec.rb[1:1:1]
+      ./lib/artfully_ose/spec/models/import_v2/person/update_job_spec.rb[1:1:1,1:1:2,1:1:3,1:1:4,1:2:1,1:3:1,1:3:2,1:3:3]<mark>
+          </code></pre>
+        </section>
+        <section>
+          <p>So I ran that insane RSpec command:</p>
+          <pre style="width: 53em"><code class="ruby" data-noescape>
+            artful.ly (branch_from_hell)$ rspec lib/artfully_os/spec/ --bisect
+            Bisect started using options: "lib/artfully_ose/spec/"
+            Running suite to find failures...
+          </code></pre>
+        </section>
+        <section>
+          <p>And got back something so beautiful:</p>
+          <img style="/*!  */" width="1000px" src="assets/rspec_bisect/poetry.gif">
+        </section>
+        <section>
+          <pre style="width: 53em"><code class="ruby" data-noescape>
+
+          </code></pre>
+        </section>
+        <section>
+          <p>Apparently I'd forgotten to durn Delayed Jobs back on
+          <br>and my spec env was bleeding all over the place</p>
+          <pre style="width: 53em"><code class="ruby" data-noescape>
+
+          </code></pre>
+        </section>
+        <section>
+          <p>With that fixed - my suite was green again</p>
+          <pre style="width: 53em"><code class="ruby" data-noescape>
+
+          </code></pre>
+        </section>
+        <section>
+          <p>RSpec bisect isn't always this cut and dry.
+            <br>Somtimes all the specs in the minimal reproduction command fail. </p>
+          <p><br>But it does help you narrow down which specs in your suite you should be looking at
+             <br> and when you have thousands of assertions and ambiguous failures
+             <br>that can be super helpful</p>
+        </section>
+        <section>
+          <p>There are some other tools that can be used with RSpec --bisect
+          <br>like --seed and you should check them out in the docs.</p>
+        </section>
+        <section>
+          <p>Then give a talk about them</p>
+        </section>
+        <section>
+          <p>because</p>
+          <img style="/*!  */" width="1000px" src="assets/rspec_bisect/I_have_no_idea.gif">
+        </section>
+        <section>
+          <p>I never did finish reading that blog post about git --bisect.</p>
+        </section>
+
+        <section>
+          <ul style="list-style-type: none">
+            <li>
+              <h2>Shout outs</h2>
+              <ul style="list-style-type: none">
+                <li>
+                  <a href="http://blog.testdouble.com/posts/2016-01-12-debugging-dependencies-with-git-bisect.html">Debugging gems with git bisect by Justin Searls</a>
+                </li>
+                <li>
+                  <a href="http://rubyweekly.com/">http://rubyweekly.com/</a>
+                </li>
+                <li>
+                  <a href="https://relishapp.com/rspec/rspec-core/docs">https://relishapp.com/rspec/rspec-core/docs</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <h2 style="padding-top: 1em">Resources</h2>
+              <ul style="list-style-type: none">
+                <li>
+                  <a href="https://relishapp.com/rspec/rspec-core/docs/command-line/bisect">https://relishapp.com/rspec/rspec-core/docs/command-line/bisect</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				width: 2000,
+				height: 800,
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
