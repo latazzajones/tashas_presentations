@@ -147,8 +147,7 @@ body {
   font-size: 0.55em;
   font-family: monospace;
   line-height: 1.2em;
-  word-wrap: break-word;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+  word-wrap: break-word; }
 
 .reveal code {
   font-family: monospace; }
@@ -157,7 +156,7 @@ body {
   display: block;
   padding: 5px;
   overflow: auto;
-  max-height: 400px;
+  max-height: 600px;
   word-wrap: normal; }
 
 .reveal table {
