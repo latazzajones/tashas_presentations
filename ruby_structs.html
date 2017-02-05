@@ -61,38 +61,435 @@
             ```ruby
             class MatchMaker
             attr_reader :one_person, :another_person
-            
+
               def initialize(one_person, another_person)
                 @one_person = one_person
                 @another_person = another_person
               end
-              
+
+              def good_match?
+                same_favorite_colors? &&
+                similar_interestes? 
+              end
+
+              private
+
+              def same_favorite_color?
+                one_person[0] == another_person[0]
+              end
+
+              def similar_interestes? 
+                (one_person[1] & another_person[1]).count > 0
+              end
+
+            end
+
+            max = ["red", ["hiking", "cooking"]]
+            logan = ["blue", ["football", "shopping"]]
+
+            MatchMaker.new(max, logan).good_match?
+           ```
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+           "Why don't you use a struct?" 
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            <img style="border: none; box-shadow: none;" src="assets/ruby_structs/thinking.png">
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+           ```ruby
+            class MatchMaker < Struct.new(:one_person, :another_person)
+
+              def good_match?
+                same_favorite_colors? &&
+                similar_interests
+              end
+          
+              private
+
+              def same_favorite_color?
+                one_person[0] == another_person[0]
+              end
+
+              def similar_interestes? 
+                (one_person[1] & another_person[1]).count > 0
+              end
+
+            end
+
+            max = ["red", ["hiking", "cooking"]]
+            logan = ["blue", ["football", "shopping"]]
+
+            MatchMaker.new(max, logan).good_match?
+          ```
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            BUT there's a problem here! 
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            structs ARE NOT classes
+          </script>
+        </section>
+         <section data-markdown>
+          <script type="text/template">
+            1 - Error handling is different
+          </script>
+        </section>      
+        <section data-markdown>
+          <script type="text/template">
+            ```vim
+            > class Personable
+            *   attr_reader :person
+            *   def initialize(person)
+            *     @person = person
+            *   end  
+            *   def greeting 
+            *     puts "Hi! Nice to meet you. My name is #{person.first_name}"
+            *   end  
+            * end  
+            => :greeting
+
+            > Personable.new(Person.first).greeting
+              Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+            Hi! Nice to meet you. My name is Cat
+            => nil
+            ```
+            classes are explicit if you're not using them correctly
+            ```vim
+            > Personable.new.greeting
+            ArgumentError: wrong number of arguments (0 for 1)
+            from (pry):3:in `initialize'
+            ```
+          </script>
+        </section>
+        <section data-markdown>
+          <script>
+            BUT
+          </script>
+        </section>  
+        <section data-markdown>
+          <script type="text/template">
+            ```vim
+            > class Personable < Struct.new(:person)
+            *   def greeting
+            *     puts "Hi! Nice to meet you. My name is #{person.first_name}"
+            *   end  
+            * end  
+            => :greeting
+
+            > Personable.new(Person.first).greeting
+              Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+            Hi! Nice to meet you. My name is Cat
+            ```
+            if you forget to pass an argument to a struct
+            ```vim
+            > Personable.new.greeting
+            NoMethodError: undefined method `first_name' for nil:NilClass
+            from (pry):3:in `greeting'
+            ```
+          </script>
+        </section>
+        <section data-markdown>
+          <script>
+            Because structs don't give high level argument errors
+          </script>
+        </section>
+        <section data-markdown>
+          <script>
+            <img height="476" src="assets/ruby_structs/slih1.gif">
+          </script>
+       </section>
+       <section data-markdown>
+          <script type="text/template">
+            2 - Struct and Class attrs are not the same!   
+          </script>
+        </section>      
+        <section data-markdown>
+         <script type="text/template">
+           Classes force you to be deliberate about your attributes
+           ```vim
+           > class Personable
+           *   attr_reader :person
+           *   def initialize(person)
+           *     @person = person
+           *   end  
+           *   def greeting 
+           *     puts "Hi! Nice to meet you. My name is #{person.first_name}"
+           *   end  
+           * end  
+           => :greeting
+
+           > p = Personable.new(Person.first).greeting
+             Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+           Hi! Nice to meet you. My name is Cat
+           ```
+           They're not publicly writable if you don't want them to be
+           ```vim
+           > p.person = Person.last
+              Person Load (0.5ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL ORDER BY `people`.`id` DESC LIMIT 1
+           NoMethodError: undefined method `person=' for #<Personable:0x007fd493652ec0>
+           from (pry):15:in `__pry__'
+           ```    
+          </script>
+        </section>      
+        <section data-markdown>
+          <script>
+            BUT
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+              ```vim 
+              > class Personable < Struct.new(:person)
+              *   def greeting
+              *     puts "Hi! Nice to meet you. My name is #{person.first_name}"
+              *   end  
+              * end  
+              => :greeting
+
+              > p = Personable.new(Person.first).greeting
+                Person Load (0.5ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+              => #<struct Personable
+               person=
+                #<Person id: 1, first_name: Cat ... >>
+              Hi! Nice to meet you. My name is Cat
+              ```
+              Structs allow some jerk to butt in on your affair
+              ```vim
+              > p.person = Person.last
+                Person Load (0.4ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL ORDER BY `people`.`id` DESC LIMIT 1
+              => #<Person id: 1536425, first_name: Ali ... >>
+              > p.greeting
+              Hi! Nice to meet you. My name is Ali
+              ```
+          </script>
+        </section>      
+        <section data-markdown>
+          <script>
+            Because under the covers - Structs are using attr_accessor by default and this exposes all of your attributes!
+          </script>
+        </section>
+        <section data-markdown>
+          <script>
+            <img height="476" src="assets/ruby_structs/slih2.gif">
+          </script>
+        </section>
+        <section data-markdown>
+           <script type="text/template">
+             3 - Structs and Classes handle comparison differently 
+           </script>
+          </section>      
+          <section data-markdown>
+           <script type="text/template">
+            ```vim 
+            > Personable.new(Person.first) == Personable.new(Person.first)
+              Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+              Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+             => false
+            ```
+            Because classes create new and unique objects
+            ```vim
+            > Personable.new(Person.first)
+              Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+             => #<Personable:0x007fd496bf90b0
+            ...
+            > Personable.new(Person.first)
+              Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+             => #<Personable:0x007fd496bf90c0
+            ```
+           </script>
+          </section>      
+          <section data-markdown>
+            <script>
+              BUT
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ```vim 
+              > Personable.new(Person.first) == Personable.new(Person.first)
+                Person Load (0.4ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+                Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+              => true
+              ```
+              Structs are equal if their attributes are the same
+              ```vim
+              > Personable.new(Person.first)
+                Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
+              => #<struct Personable
+              ```
+            </script>
+          </section>      
+          <section data-markdown>
+            <script>
+              Calling a struct doesn't create a new, unique instance!  
+            </script>
+          </section>
+          <section data-markdown>
+            <script>
+              <img height="476" src="assets/ruby_structs/slih3.gif">
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              Structs aren't intended to be subclassed in this way! 
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+              Live coding! Let's check out the ancestors of classes vs. structs vs. structs assigned to variables!
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+              ```ruby
+                class Anything < Struct.new();end
+              ```
+              ☝️ is basically creating an anonymous Struct object and having your class inherit from it.
+
+              And you have to admit - that sounds kinda stinky 💩
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+              <img height="476" src="assets/ruby_structs/slih4.gif">
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+              ```ruby
+                Anything = Struct.new()
+              ```
+              ☝️ this is the ONLY way the docs show off structs. 
+
+              <small>"This is the recommended way to customize a struct. Subclassing an anonymous struct creates an extra anonymous class that will never be used." - the docs </small>
+
+              Even then, structs still have the issues metioned above.
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+              So when should I use a struct? 
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+              Quote Sandi Metz here <- because OMG who wouldn't want to quote Sandi Metz?!
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+            ```ruby
+            class MatchMaker
+            attr_reader :one_person, :another_person
+
+              def initialize(one_person, another_person)
+                @one_person = one_person
+                @another_person = another_person
+              end
+
               def good_match
+                same_favorite_colors? &&
+                similar_interestes? 
+              end
+
+              private
+
+              def same_favorite_color?
+                one_person[0] == another_person[0]
+              end
+
+              def similar_interestes? 
+                (one_person[1] & another_person[1]) > 0
+              end
+
+            end
+
+            max = ["red", ["hiking", "cooking"]]
+            logan = ["blue", ["football", "shopping"]]
+
+            MatchMaker.new(max , logan)
+            ```
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+            Structs are great for storing and contextualizing data!
+
+            ```ruby
+            class MatchMaker
+            attr_reader :one_person, :another_person
+
+              def initialize(one_person, another_person)
+                @one_person = personify(one_person)
+                @another_person = personify(another_person)
+              end
+
+              def good_match?
                 same_favorite_colors? &&
                 similar_interestes? 
               end
               
               private
-              
+
               def same_favorite_color?
-                one_person.favorite_color == another_person.favorite_color?
+                one_person.fav_color == another_person.fav_color
               end
-              
-              def similar_interestes?
-                (one_person.interests & another_person.interest) > 0
+
+              def similar_interestes? 
+                (one_person.insterests & another_person.interests).count > 0
               end
-              
+
+              Person = Struct.new(:fav_color, :interests)
+              def personify(data)
+                Person.new(data[0], data[1])
+              end
             end
+
+            max = ["red", ["hiking", "cooking"]]
+            logan = ["blue", ["football", "shopping"]]
+
+            MatchMaker.new(max, logan).good_match?
             ```
-          </script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
-            <img height="476" src="assets/ruby_structs/computering.gif">
-          </script>
-        </section>
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+              Structs are great for containing data!
+  
+              They can make data more readable.
 
+              They can make data handling more changable in your class.
 
+              BUT THEY'RE NOT CLASSES! _(Looking at you DelayedJob_ 😒 _)_ 
+            </script>
+          </section>      
+          <section data-markdown>
+            <script type="text/template">
+              Resources: 
+                - A 4 year old blog post   
+                  <small> https://thepugautomatic.com/2013/08/struct-inheritance-is-overused/</small>
+                - A blog post by Steve Klabnick about inheritance
+                  <small>http://words.steveklabnik.com/beware-subclassing-ruby-core-classes</small>
+                - An obscure exchange on twitter   
+                   <small>https://twitter.com/joshsusser/status/365286610578849794</small>
+                - The docs  
+                   <small>https://ruby-doc.org/core-2.1.1/Struct.html</small>
+                - This reddit exchange
+                  <small>https://www.reddit.com/r/ruby/comments/14u7zs/dont_subclass_struct_classes_please/</small>
+                - AND irb ... play with it yourself! 
+            </script>
+          </section>      
 
       </div>
 
