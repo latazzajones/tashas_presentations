@@ -147,7 +147,7 @@
         </section>      
         <section data-markdown>
           <script type="text/template">
-            ```vim
+            ```irb
             > class Personable
             *   attr_reader :person
             *   def initialize(person)
@@ -165,7 +165,7 @@
             => nil
             ```
             classes are explicit if you're not using them correctly
-            ```vim
+            ```irb
             > Personable.new.greeting
             ArgumentError: wrong number of arguments (0 for 1)
             from (pry):3:in `initialize'
@@ -179,7 +179,7 @@
         </section>  
         <section data-markdown>
           <script type="text/template">
-            ```vim
+            ```irb
             > class Personable < Struct.new(:person)
             *   def greeting
             *     puts "Hi! Nice to meet you. My name is #{person.first_name}"
@@ -192,7 +192,7 @@
             Hi! Nice to meet you. My name is Cat
             ```
             if you forget to pass an argument to a struct
-            ```vim
+            ```irb
             > Personable.new.greeting
             NoMethodError: undefined method `first_name' for nil:NilClass
             from (pry):3:in `greeting'
@@ -217,7 +217,7 @@
         <section data-markdown>
          <script type="text/template">
            Classes force you to be deliberate about your attributes
-           ```vim
+           ```irb
            > class Personable
            *   attr_reader :person
            *   def initialize(person)
@@ -234,7 +234,7 @@
            Hi! Nice to meet you. My name is Cat
            ```
            They're not publicly writable if you don't want them to be
-           ```vim
+           ```irb
            > p.person = Person.last
               Person Load (0.5ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL ORDER BY `people`.`id` DESC LIMIT 1
            NoMethodError: undefined method `person=' for #<Personable:0x007fd493652ec0>
@@ -249,7 +249,7 @@
         </section>
         <section data-markdown>
           <script type="text/template">
-              ```vim 
+              ```irb 
               > class Personable < Struct.new(:person)
               *   def greeting
               *     puts "Hi! Nice to meet you. My name is #{person.first_name}"
@@ -265,7 +265,7 @@
               Hi! Nice to meet you. My name is Cat
               ```
               Structs allow some jerk to butt in on your affair
-              ```vim
+              ```irb
               > p.person = Person.last
                 Person Load (0.4ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL ORDER BY `people`.`id` DESC LIMIT 1
               => #<Person id: 1536425, first_name: Ali ... >>
@@ -291,14 +291,14 @@
           </section>      
           <section data-markdown>
            <script type="text/template">
-            ```vim 
+            ```irb 
             > Personable.new(Person.first) == Personable.new(Person.first)
               Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
               Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
              => false
             ```
             Because classes create new and unique objects
-            ```vim
+            ```irb
             > Personable.new(Person.first)
               Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
              => #<Personable:0x007fd496bf90b0
@@ -316,14 +316,14 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              ```vim 
+              ```irb 
               > Personable.new(Person.first) == Personable.new(Person.first)
                 Person Load (0.4ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
                 Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
               => true
               ```
               Structs are equal if their attributes are the same
-              ```vim
+              ```irb
               > Personable.new(Person.first)
                 Person Load (0.3ms)  SELECT `people`.* FROM `people` WHERE `people`.`deleted_at` IS NULL LIMIT 1
               => #<struct Personable
