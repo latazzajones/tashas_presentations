@@ -40,15 +40,15 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <!-- install ruby -->
-       <section data-markdown>
-          <script type="text/template">
-            ## Ruby Structs 
-          </script>
-        </section>
+        <section>
+					<h1>Ruby Structs</h1>
+				</section>
         <section data-markdown>
           <script type="text/template">
             ## A Dangerous Love Affair 
             <img src="assets/ruby_structs/dont_go_into_the_woods.gif">
+
+            <small>A presentation by Tasha Jones</a> / <a href="http://twitter.com/latazzajones">@latazzajones</a></small>
           </script>
         </section>
         <section data-markdown>
@@ -132,15 +132,25 @@
         </section>
         <section data-markdown>
           <script type="text/template">
-            BUT there's a problem here! 
+            <img height="467" src="assets/ruby_structs/love.gif">
+          </script>
+        </section>
+       <section data-markdown>
+          <script type="text/template">
+            And it worked perfectly - it behaved exactly the same! 
           </script>
         </section>
         <section data-markdown>
           <script type="text/template">
-            structs ARE NOT classes
+            or so I thought ... 
           </script>
         </section>
-         <section data-markdown>
+        <section data-markdown>
+          <script type="text/template">
+            writing a class that inherits from Struct changes the behavior of that class
+          </script>
+        </section>
+       <section data-markdown>
           <script type="text/template">
             1 - Error handling is different
           </script>
@@ -368,7 +378,7 @@
           <section data-markdown>
             <script type="text/template">
               ```ruby
-                Anything = Struct.new()
+              Anything = Struct.new()
               ```
               ☝️ this is the ONLY way the docs show off structs. 
 
