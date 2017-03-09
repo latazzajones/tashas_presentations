@@ -1,4 +1,4 @@
-#Increasing Diversity By Saying Hi
+#Increasing Diversity and Making Friends 
 
 ##Summary
 Diversity and inclusion have been a hot topic for years. There are those who care, those who don't care and those who say they care. But - what if I were to tell you that there's only one thing you need to do to be a part of increasing diversity? What if I were to give you one task - one small and low commitment thing you can do during this conference that will make you a vital asset to any company looking to increase the diversity of their team. 
