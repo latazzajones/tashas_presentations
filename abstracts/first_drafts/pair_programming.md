@@ -22,21 +22,21 @@ Pairing Roles:
 1. Navigator/navigators
 
 Pairing Variations: 
-1. Expert–expert: Expert–expert pairing may seem to be the obvious choice for the highest productivity and can produce great results, but it often yields little insight into new ways to solve problems, as both parties are unlikely to question established practices.
-      *Some examples of what this can look like*
-1. Expert–novice: Expert–novice pairing creates many opportunities for the expert to mentor the novice. This pairing can also introduce new ideas, as the novice is more likely to question established practices. The expert, now required to explain established practices, is also more likely to question them. However, in this pairing, an intimidated novice may passively "watch the master" and hesitate to participate meaningfully. Also, some experts may not have the patience needed to allow constructive novice participation.
-      *Some examples of what this can look like*
-1. Novice–novice: Novice–novice pairing can produce results significantly better than two novices working independently, although, this practice is generally discouraged.
-      *Some examples of what this can look like*
-1. Mob: Diverse group of mixed skill level. Risky and should be done carefully. Bad rep from origins. 
-      Pros
-      Cons
+1. Expert–expert: Expert–expert pairing may seem to be the obvious choice for the highest productivity and can produce great results, but it often yields little insight into new ways to solve problems, as both parties are unlikely to question established practices.  
+      *- Some examples of what this can look like*
+1. Expert–novice: Expert–novice pairing creates many opportunities for the expert to mentor the novice. This pairing can also introduce new ideas, as the novice is more likely to question established practices. The expert, now required to explain established practices, is also more likely to question them. However, in this pairing, an intimidated novice may passively "watch the master" and hesitate to participate meaningfully. Also, some experts may not have the patience needed to allow constructive novice participation.  
+      *- Some examples of what this can look like*
+1. Novice–novice: Novice–novice pairing can produce results significantly better than two novices working independently, although, this practice is generally discouraged.  
+      *- Some examples of what this can look like*
+1. Mob: Diverse group of mixed skill level. Risky and should be done carefully. Bad rep from origins.   
+      - Pros
+      - Cons
 
 Pairing Patterns: 
-1. TDD Ping Pong 
-  1. Who is this good for (from variations)?
-  1. Who should avoid this?
-  1. Who drives and who navigates?
+1. TDD Ping Pong   
+  - Who is this good for (from variations)?
+  - Who should avoid this?
+  - Who drives and who navigates?
 1. Designated Driver/Navigator
   .
   .
