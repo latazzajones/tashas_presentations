@@ -33,7 +33,7 @@ Pairing Patterns:
 1. Who should avoid this?
 1. Who drives and who navigates?
 
-Resources: 
+# Resources: 
 http://engineering.pivotal.io/post/pair-programming-in-a-distributed-team/
 https://en.wikipedia.org/wiki/Pair_programming#Pairing_variations 
 http://www.wikihow.com/Pair-Program 
