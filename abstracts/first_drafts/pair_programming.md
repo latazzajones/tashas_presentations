@@ -56,10 +56,10 @@ Pairing Patterns:
 1. *more research needed here* 
 
 # Resources: 
-http://engineering.pivotal.io/post/pair-programming-in-a-distributed-team/
-https://en.wikipedia.org/wiki/Pair_programming#Pairing_variations 
-http://www.wikihow.com/Pair-Program 
-http://wiki.c2.com/?PairProgramming
-http://wiki.c2.com/?PairProgrammingPattern
-http://wiki.c2.com/?PairRotationFrequency
+http://engineering.pivotal.io/post/pair-programming-in-a-distributed-team/  
+https://en.wikipedia.org/wiki/Pair_programming#Pairing_variations   
+http://www.wikihow.com/Pair-Program   
+http://wiki.c2.com/?PairProgramming  
+http://wiki.c2.com/?PairProgrammingPattern  
+http://wiki.c2.com/?PairRotationFrequency  
 
