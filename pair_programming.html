@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+		<link rel="stylesheet" href="css/theme/original_white.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/tashas_hilight.css">
@@ -40,13 +40,13 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-        <section>
+        <section data-markdown>
           One day I was like "Hey! Why don't you navigate and I'll drive!"
         </section>
 			</div>
 
 			<div class="slides">
-        <section>
+        <section data-markdown>
           And my team mate was like "What?"
         </section>
 			</div>
@@ -57,23 +57,290 @@
         </section>
 			</div>
 		  <div class="slides">
-        <section>
-          My team had been pushing to do more pair programming for a long time but no one had really talked about what pair programming looks like and it had actually been the sources of a lot of confusion and stress. 
+        <section data-markdown>
+          ### 🍐 🍐 🍐 How to Pair Program Without Losing Your Mind
+         
+          a talk by: [@latazzajones](https://twitter.com/latazzajones)
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Groundrules
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          - Respect each other’s timezones
+          
+            If it one team member’s lunchtime, they take their lunch.   
+            If it is 6pm where you currently are, you are done for the day.   
+            This makes remote pairing both enjoyable and sustainable
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+         - Takes breaks
+          
+          Play a remote game online for 5 minutes as opposed to a ping-pong game.  
+          Talk to your pair and get to know them.  
+          Getting to know your team member at a personal level makes pairing with them that much more enjoyable.
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          - Decide who is driving and for how long before you start the session.
+          
+            More on this 😉
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          - Decide which pairing pattern you’re using before you start your session.
+
+            More on this too 😉
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          ![driving](assets/pair_programming/road_trip.gif) 
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Driver?  
         </section>
 			</div>
 		  <div class="slides">
         <section>
+          <h3>Basic responsibilities</h3>
+
+          <img width="auto" height="250" src="assets/pair_programming/navagator_driver.png">
         </section>
 			</div>
 		  <div class="slides">
         <section>
+          <h4>Pairing and skill diversity variations</h4>
+          <img class="plain" width="auto" height="400" src="assets/pair_programming/all_types_fruit.png">
         </section>
 			</div>
 		  <div class="slides">
         <section>
+          <h5>Expert-Expert</h5>   
+
+          <img class="plain" width="auto" height="200" src="assets/pair_programming/expert-expert.png">
         </section>
 			</div>
-	
+		  <div class="slides">
+        <section>
+          <img class="plain" width="auto" height="200" src="assets/pair_programming/mid-mid.png">
+        </section>
+      </div>
+		  <div class="slides">
+        <section data-markdown>
+         Defined as: 
+
+          Both partners have a similar level of expertise   
+          in both the tools and domain
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Strengths: 
+            
+            - High productivity 
+            - Can lead to more efficiant and higher quality work.
+            - Allows for both developers to spur off and explore different appraoches to solving the problem when at a decision making crossroad. 
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Weaknesses: 
+
+            - Rarely leads to new-innovative approaches to problems since both parties are less likely to question the norms of the framework or codebase
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Additional Groundrules:
+
+            - RESPECT
+            - The pair *must* take turns driving vs navigating 
+        </section>
+			</div>
+		  <div class="slides">
+        <section>
+          <h5>Novice-Expert</h5>
+
+          <img class="plain" width="auto" height="200" src="assets/pair_programming/expert-novice.png">
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Defined as: 
+          
+            The partners have different levels of experteese in either the tools or domain.
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Strengths: 
+          
+            - A novice is more likely to question patterns and norms.
+            - The expert is more likely to question established patterns when they have to explain those patterns to the novice
+            - Provides opportunity for learning about the tools or domain for the novice.
+            - Forces the expert to slow down and produce better quality work.
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Weaknesses: 
+
+            - Extra caution and empathy is required of the expert to ensure that the mentor doesn't end up passivly watching.
+            - Can feel slower for the expert.
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Additional Groundrules: 
+            
+            - The novice must be driving for the bulk of the time.
+            - The expert SHOULD NOT do side research. Instead the expert should tell the novice where to look if documents are needed for reference.
+        </section>
+			</div>
+		  <div class="slides">
+        <section>
+          <h5>Novice-Novice</h5>
+
+          <img class="plain" width="auto" height="200" src="assets/pair_programming/novice-novice.png">
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Defined as: 
+
+            The partners have similar levels of experteese in both tools and domain and that experteese is limited. This typically refers to interns/students and new hires.
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Strengths: 
+
+            - Will significantly increase the capabilities of the two for solving problems outside of their existing skill set.
+            - Prevents the novices from feeling stuck or trapped in a task outside of their skill set.
+            - Allows for time for the expert to have a mental break or work on other tasks as needed. 
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Weaknesses: 
+
+            - The resulting work needs careful review.
+            - Can reinforce bad habbits without an expert present asynchronously.
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Additional Groundrules: 
+
+            - An expert must be present asynchronously and available for review + asking question. 
+            - The novices must take turns driving
+            - Empathy is required of both novices to prevent one from passivly watching.
+        </section>
+			</div>
+		  <div class="slides">
+        <section>
+          <h5>Mob</h5>
+          
+          <img class="plain" width="auto" height="200" src="assets/pair_programming/mob.png">
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Strengths: 
+
+            - Very effective when approaching large architectural issues in a codebase everyone is familiar with.
+            - Can be great for dealing with OnFire bugs 🔥 
+            - Can be a great tool from team building
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Weaknesses: 
+
+            - Will become a garbage-fire if effective communication patterns and channels are not identified 🔥🔥🔥
+            - Requires empathy to ensure that novices don't become passive watchers.
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Additional Groundrules: 
+
+            - Teams should determin communication patterns and channels in advance. 
+            - Should be done in person or via video share
+            - The most novice members of the group should drive.
+        </section>
+			</div>
+		  <div class="slides">
+        <section>
+          <h4>Paring Patterns</h4> 
+
+          <img class="plain" width="auto" height="400" src="assets/pair_programming/moving.png">
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          There are SO many ways to get to your destination!
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          <h5>Ping Pong</h5>
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          <h5>Designated Driver</h5>
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+          Some final bits of advice:
+
+            - Pair programming doesn't need to happen 100% of the time
+              (my sweet spot is 4-8 hours per week and less than 3 hour at a time)
+            - Pair programming requires PRACTICE!!
+            - It also requires kindness, introspection and empathy. 
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+        </section>
+			</div>
+		  <div class="slides">
+        <section data-markdown>
+        </section>
+			</div>
+
 
 		</div>
 

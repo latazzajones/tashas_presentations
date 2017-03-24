@@ -1,8 +1,8 @@
 # Title: 
-🍐 🍐 🍐 A Framework for Pairing Without Loosing Your Mind. 
+🍐 🍐 🍐 How to Pair Program Without Losing Your Mind
 
-# Abstract: 
-A lack of clarity and structure can increase resistance to pair programming on any team.  One of the issues with pair programming is that people confuse it for "talking to each other about a problem". While that is one aspect of pairing, there is a framework that can ensure that every memeber of the pairing session is engaged and gaining something from the experience. 
+# Abstract:
+A lack of clarity and structure can increase resistance to pair programming on any team.  One of the issues with pair programming is that people confuse it for "talking to each other about a problem". While that is one aspect of pairing, there is a framework that can ensure that every member of the pairing session is engaged and gaining something from the experience. 
 
 This talk will outline groundrules, pairing roles, pairing variations based on experience level, and pairing patterns to decrease the stress of pairing and optimise pairing for all that it has to offer your team.
 
