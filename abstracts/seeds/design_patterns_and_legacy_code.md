@@ -3,13 +3,11 @@
 ##Goals
 
 ##Summary
-One of the frustrations of working in a legacy codebase is the lack of control over the architecture and design of the existing code especially when your tasked with keeping the old sucker running and not building or refactoring old features.
+When you're trying to keep your old VW Rabbit on the road with some duct tape and luck it's tempting to throw quick fixes at it to keep it moving. However, quick fixes short-change both the business and the developer who's stuck on the side of the road trying to keep the muffler from falling off.
 
-When you're trying to keep your old Toyota Rabbit on the road with some duct tape and luck it's tempting to throw quick fixes at it to keep it moving but this short changes both the buisness and the developer who's stuck on the side of the road trying to get the mufler from falling off. 
+What are some patterns that can help us continue building on a this type of codebase but also provide the continuous improvement it needs? How can we be sure we're using the right tool for the right task?
 
-How can design patterns help us with legacy code? How can we be sure we're using the right tool for the right task? (cite Sandi Metz here) 
-
-Here I'll give examples of how we've used a number of design patterns in our effort to keep our car on the road.
+The aim of this talk is to explore some of these questions and talk about the realities of adopting legacy code
 
 ##Outline
 *Data cleanup
